@@ -9,6 +9,8 @@ import static org.junit.Assert.*;
 public class StepDefinitions {
 	private RentACat r;
 	private String listResult;
+	private boolean rentResult;
+	private boolean returnResult;
 	
 	// TODO: Add more member variables and methods as necessary
 
@@ -35,8 +37,32 @@ public class StepDefinitions {
 	
 	@When("I rent cat number {int}")
 	public void iRentCatNumber(Integer id) {
-		// TODO: Implement
-		fail();
+		if(r.catExists(id) && r.catAvailable(id))
+		{
+			r.rentCat(id);
+			rentResult = true;
+			System.out.println("Rented cat " + id);
+		}
+		else
+		{
+			rentResult = false;
+			System.out.println("Cat " + id + "does not exist!");
+		}
+	}
+	
+	@When("I return cat number {int}")
+	public void iReturnCatNumber(Integer int1) {
+		if(r.catExists(int1) && !r.catAvailable(int1))
+		{
+			r.returnCat(int1);
+			returnResult = true;
+			System.out.println("Returned cat " + int1);
+		}
+		else
+		{
+			returnResult = false;
+			System.out.println("Cat " + int1 + "does not exist!");
+		}
 	}
 	
 	@Then("the listing is: {string}")
@@ -46,13 +72,22 @@ public class StepDefinitions {
 	
 	@Then("the rent is successful")
 	public void theRentIsSuccessful() {
-		// TODO: Implement
-		fail();
+		assertTrue(rentResult);
 	}
 
 	@Then("the rent is unsuccessful")
 	public void theRentIsUnsuccessful() {
-		// TODO: Implement
-		fail();
+		assertFalse(rentResult);
 	}
+	
+	@Then("the return is successful")
+	public void theReturnIsSuccessful() {
+		assertTrue(returnResult);
+	}
+	
+	@Then("the return is unsuccessful")
+	public void theReturnIsUnsuccessful() {
+		assertFalse(returnResult);
+	}
+	
 }
