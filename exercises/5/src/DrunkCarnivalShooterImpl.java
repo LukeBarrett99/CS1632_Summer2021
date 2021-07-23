@@ -9,10 +9,10 @@ import java.util.Scanner;
 public class DrunkCarnivalShooterImpl implements DrunkCarnivalShooter {
 	private  Random rand;
 
-	private  ArrayList<Boolean> targets;
-	private  int remainingTargetNum;
+	private static ArrayList<Boolean> targets;
+	private int remainingTargetNum;
 
-	private  int roundNum;
+	private static int roundNum;
 
 	/**
 	 * Constructor. Creates 4 targets for the player to shoot. Not a particularly
@@ -20,7 +20,7 @@ public class DrunkCarnivalShooterImpl implements DrunkCarnivalShooter {
 	 * with no chance for injection.
 	 * 
 	 */
-	 DrunkCarnivalShooterImpl() {
+	 static DrunkCarnivalShooterImpl() {
 		rand = new Random();
 		targets = new ArrayList<Boolean>();
 		remainingTargetNum = 4;
